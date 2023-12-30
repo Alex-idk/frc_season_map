@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 import re
-import tomllib
+import toml
 import logging
 
 from .frcmap import FRCMap
@@ -103,14 +103,14 @@ def run(root_path):
     teams: LocationDict = {}
     if os.path.exists(args.teams):
         log.info(f"Loading team locations from:  {args.teams}")
-        with open(args.teams, "rb") as f:
-            teams = tomllib.load(f)
+        with open(args.teams, "r") as f:
+            teams = toml.loads(f.read())
 
     events: LocationDict = {}
     if os.path.exists(args.events):
         log.info(f"Loading event locations from: {args.events}")
-        with open(args.events, "rb") as f:
-            events = tomllib.load(f)
+        with open(args.events, "r") as f:
+            events = toml.loads(f.read())
 
     # Make sure archive path exists.
     archive_path = args.archive
